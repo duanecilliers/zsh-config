@@ -59,3 +59,6 @@ antibody bundle < ~/.config/zsh/.plugins
 
 # To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
 [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
+
+# https://github.com/zsh-users/zsh-syntax-highlighting
+antibody bundle zsh-users/zsh-syntax-highlighting
