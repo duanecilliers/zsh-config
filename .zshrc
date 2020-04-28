@@ -35,8 +35,7 @@ bindkey -s '^o' 'lfcd\n'
 autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
 
-# Load aliases shortcuts if existent.
-[ -f "$HOME/.config/zsh/.shortcuts" ] && source "$HOME/.config/.zsh/.shortcuts"
+# Load aliases if existent.
 [ -f "$HOME/.config/zsh/.aliases" ] && source "$HOME/.config/zsh/.aliases"
 
 # Load custom paths
