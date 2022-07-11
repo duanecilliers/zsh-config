@@ -1,4 +1,5 @@
 .shortcuts
 .paths
 .zcompdump
+.zcompcache
 .extra
