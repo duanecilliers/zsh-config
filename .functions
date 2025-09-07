@@ -1,5 +1,5 @@
 # wtree: Create a new worktree for each given branch.
-# Usage: wtree [ -p|--pnpm ] [ --wp <worktree-parent> ] branch1 branch2 ...
+# Usage: wtree [ -p|--pnpm ] [ --wp <worktree-parent> ] [ --init <command> ] branch1 branch2 ...
 #
 # This function does the following:
 #   1. Parses command-line arguments; if -p/--pnpm is provided, it will later run "pnpm install".
@@ -17,6 +17,7 @@ wtree() {
   local install_deps=false
   local branches=()
   local worktree_parent="$HOME/Dev"
+  local init_command=""
 
   # Parse command-line arguments
   while [[ $# -gt 0 ]]; do
@@ -33,6 +34,14 @@ wtree() {
         worktree_parent="$2"
         shift 2
         ;;
+      --init)
+        if [[ $# -lt 2 ]]; then
+          echo "Error: --init requires a command argument."
+          return 1
+        fi
+        init_command="$2"
+        shift 2
+        ;;
       *)
         branches+=("$1")
         shift
@@ -42,7 +51,7 @@ wtree() {
 
   # Ensure at least one branch name is provided.
   if [[ ${#branches[@]} -eq 0 ]]; then
-    echo "Usage: wtree [ -p|--pnpm ] [ --wp <worktree-parent> ] branch1 branch2 ..."
+    echo "Usage: wtree [ -p|--pnpm ] [ --wp <worktree-parent> ] [ --init <command> ] branch1 branch2 ..."
     return 1
   fi
 
@@ -106,6 +115,14 @@ wtree() {
       echo "Installing dependencies in worktree for branch '${branch}'..."
       if ! ( cd "$target_path" && pnpm install ); then
         echo "Warning: Failed to install dependencies in '${target_path}'."
+      fi
+    fi
+
+    # If an init command is provided, run it in the new worktree.
+    if [[ -n "$init_command" ]]; then
+      echo "Running init command in worktree for branch '${branch}': ${init_command}"
+      if ! ( cd "$target_path" && eval "$init_command" ); then
+        echo "Warning: Init command failed in '${target_path}'."
       fi
     fi
 
