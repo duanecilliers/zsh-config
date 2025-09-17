@@ -50,3 +50,14 @@ alias path='echo -e ${PATH//:/\\n}'
 
 # Laravel Sail
 alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail'
+
+alias python=python3
+
+# Git overrides
+alias gc='gcs'
+
+# Print out a list of `node_modules` to be deleted:
+alias rmnodemodulesdry="find . -name 'node_modules' -type d -prune"
+
+# Recursively remove `node_modules`
+alias rmnodemodules="find . -name 'node_modules' -type d -prune -exec rm -rf '{}' +"
