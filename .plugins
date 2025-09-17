@@ -21,8 +21,5 @@ ohmyzsh/ohmyzsh path:plugins/safe-paste
 ohmyzsh/ohmyzsh path:plugins/sbt
 ohmyzsh/ohmyzsh path:plugins/scala
 ohmyzsh/ohmyzsh path:plugins/ssh-agent
-ohmyzsh/ohmyzsh path:plugins/thefuck
+# ohmyzsh/ohmyzsh path:plugins/thefuck
 ohmyzsh/ohmyzsh path:plugins/yarn
-
-# Other plugins
-sobolevn/wakatime-zsh-plugin
