@@ -47,17 +47,15 @@ bindkey '^e' edit-command-line
 # Load zsh-syntax-highlighting; should be last.
 # source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
 
-# antibody - http://getantibody.github.io/
-source <(antibody init)
+source /opt/homebrew/Cellar/antidote/1.9.10/share/antidote/antidote.zsh
 
-# Themes https://github.com/getantibody/antibody/issues/152#issuecomment-461702119
-antibody bundle romkatv/powerlevel10k
+antidote load
 
-# Plugins
-antibody bundle < ~/.config/zsh/.plugins
+# antidote - https://antidote.sh/
+source <(antidote init)
 
 # To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
 [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
 
 # https://github.com/zsh-users/zsh-syntax-highlighting
-antibody bundle zsh-users/zsh-syntax-highlighting
+antidote bundle zsh-users/zsh-syntax-highlighting
