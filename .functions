@@ -84,7 +84,9 @@ wtree() {
   # Loop over each branch provided as argument.
   for branch in "${branches[@]}"; do
     # Define the target path using a naming convention: <repoName>-<branch>
-    local target_path="$worktree_parent/${repo_name}-${branch}"
+    # Replace forward slashes with dashes for the directory name
+    local dir_name="${branch//\//-}"
+    local target_path="$worktree_parent/${repo_name}-${dir_name}"
     
     echo "Processing branch: ${branch}"
 
@@ -217,10 +219,12 @@ wtmerge() {
   done < <(git worktree list)
 
   # Check that the target branch worktree exists.
+  # Replace forward slashes with dashes to match wtree directory naming
+  local dir_name="${branch_to_keep//\//-}"
   local target_worktree=""
 
   for wt in "${worktrees[@]}"; do
-    if [[ "$wt" == "$worktree_parent/${repo_name}-${branch_to_keep}" ]]; then
+    if [[ "$wt" == "$worktree_parent/${repo_name}-${dir_name}" ]]; then
       target_worktree="$wt"
       break
     fi
